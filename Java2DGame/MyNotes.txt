@@ -1,0 +1,65 @@
+
+
+Extending a class is fine as long as it doesn't affect existing programs. The original purpose of extending a class is to add functionality, but you can also use it without necessarily adding new features. In such cases, the main benefit of extending a class is that you don't have to create new instances of the class repeatedly. As long as your changes do not break existing behavior, extending a class can be a useful tool for simplifying your code.
+
+
+======================================================
+
+1. Static Variables and Methods:
+   - "Static" makes variables and methods belong to the class itself rather than to instances. You don't need an instance of the class to access them.
+   - Static variables can be accessed within the same class without creating an object.
+   - So basically, If we need to use a method we created in our class, we don't need to call our class inside our class just to access that method as long as it is a static method.
+   
+2. Accessibility:
+   - If a variable or method is "static", it can be accessed anywhere within the same class.
+   - "Public" makes the static variable or method accessible to other classes. Without `public`, access is restricted to within the same class or package.
+
+3. Static and Public Together:
+   - When a static variable or method is also **public**, it can be accessed from other classes using the class name, e.g., `ClassName.variableName`.
+
+In short:
+- Static makes variables and methods accessible across the same class.
+- Public extends the accessibility to other classes.
+
+=========================================================
+
+`super` refers to the parent class (the class being extended). For example, if `GamePanel` extends `JPanel`, it means that `GamePanel` is an extension of `JPanel`. When we use `super`, it refers to the `JPanel` class itself, not `GamePanel`. You can think of it like `JPanel` is the base game, and `GamePanel` is the DLC that adds additional features. **`super`** only accesses the functionality of the base game (`JPanel`), not the DLC (`GamePanel`).
+
+The keyword 'this' refers to the current instance of the class in which it is used, and not to any other class. When using 'this.variableName', it refers to the specific value assigned to that variable for the current instance, not the class itself.
+============================================================
+
+
+panel.setBackground(Color.BLACK); // Updates the background color property
+     ↓
+panel.repaint();                 // Requests a repaint
+     ↓
+Swing: paint(Graphics g)         // Painting system kicks in, this method continuously asking for things to be displayed (Graphics g)
+     ↓
+Swing: paintComponent(Graphics g) // Background is painted using g
+
+Conclusion:
+JPanel doesn't directly display the background color.
+paintComponent is where the background is painted (or any custom drawing you want to do).
+The panel is essentially requesting the Swing painting system to render the background color.
+
+Sure! Here's an improved version of your statement:
+
+---
+
+**The following three methods are responsible for rendering the visual elements of a component in Swing:**
+
+paintComponent (first) sets the background (the canvas).
+paintBorder (second) adds the border (tape around the canvas).
+paintChildren (last) adds the child components (things like text, buttons, etc.).
+
+These methods collectively manage the **visual display** of the component, each focusing on different aspects like content, borders, and child components.
+
+When you call super.paintComponent(g) in your overridden paintComponent, it paints the default background and triggers paintChildren(g), which renders child components like buttons. After that, your custom drawings (sprites, text, etc.) are painted on top of everything else.
+
+===============================================
+
+class MyClass extends Human()  // MyClass is the subclass, Human is the superclass
+
+Human myHuman = (Human) myBoy;  // Upcasting (Subclass to Superclass)
+MyClass myBoyAgain = (MyClass) myHuman;  // Downcasting (Superclass to Subclass)
+
